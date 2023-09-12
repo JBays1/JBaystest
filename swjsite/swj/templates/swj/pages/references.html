@@ -1,0 +1,21 @@
+{% extends "swj/base.html" %}
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>{% block title %}{% endblock %}</title>
+</head>
+
+<body>
+    <!-- Start of content bar -->
+  <div id="content">
+    {% block content %}
+    <h1>References page </h1>
+    <h2>In this page we can show the references</h2>
+    {% endblock %}
+  </div>
+  <!-- end of Content bar -->
+</body>
+</html>

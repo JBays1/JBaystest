@@ -14,7 +14,7 @@ class Member(models.Model):
         PUBLISHED = 'PB', 'Published'
     
     name = models.CharField(max_length=1000)
-    slug = models.SlugField(max_length=10)
+    slug = models.SlugField(max_length=10, unique_for_date='publish')
     author = models.ForeignKey(User,
                                on_delete=models.CASCADE,
                                related_name='swj_members')
