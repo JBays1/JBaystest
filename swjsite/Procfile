@@ -1,0 +1,1 @@
+web gunicorn swjsite.wsgi:application --log-file -
