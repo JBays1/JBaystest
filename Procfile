@@ -1,1 +1,1 @@
-web: gunicorn swj.wsgi --log-file -
+web: gunicorn JBaystest.wsgi --log-file -
