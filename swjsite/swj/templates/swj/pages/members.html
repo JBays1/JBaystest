@@ -1,0 +1,107 @@
+{% extends "swj/base.html" %}
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>{% block title %}{% endblock %}</title>
+</head>
+
+<body>
+    <!-- Start of content bar -->
+  <div id="content">
+    {% block content %}
+
+  <!-- Start of the Search Engine bar-->
+    {% if query %}
+    <h1>Name containing "{{ query }}"</h1>
+    <h3>
+      {% with results.count as total_results %}
+        Found {{ total_results }} result{{ total_results|pluralize }}
+      {% endwith %}
+    </h3>
+    {% for member in results %}
+    <h2>
+      <a href="{% url 'swj:member_detail' member.id %}">
+        {{ member.name }}
+      </a>
+    </h2>
+    {% empty %}
+    <p>There are no results for your query.</p>
+    {% endfor %}
+    <p>
+    <button type="submit" id="againButton" 
+
+    style="
+    cursor: pointer;
+    height: 32px;
+    width: 40px;
+    display: inline-block;
+    font-weight: 400;
+    text-align: center;
+    background-color: #efe3e3;
+    padding: 6px 12px;
+    font-size: 1rem;
+    border-radius: .25rem;
+    transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+    border-color: #5cbdb9;"
+    >
+
+      <a href="{% url "swj:members" %}"><i class="fa fa-undo"></i></a></p>
+    </button>
+    {% else %}
+    
+    <!-- Search bar form -->
+    <!-- Form style changes the fit -->
+    <!-- Input style changes the search bar look -->
+    <form method="get" id="search" 
+
+    style="
+    width: 100%;
+    position: relative;
+    display: flex;"
+    >
+
+      <input type="text" name="query" placeholder="Search..." id="search-input"
+
+    style="
+    width: 100%;
+    position: relative;
+    display: flex;
+    border: 3px solid #00B4CC;
+    border-right: none;
+    padding: 5px;
+    height: 40px;
+    font-size: 30px;
+    border-radius: 5px 0 0 5px;
+    outline: none;
+    color: #00B4CC;"
+    >
+
+      <button type="submit" class="searchButton">
+        <i class="fa fa-search"></i>
+      </button>
+    </form>
+    {% endif %}
+    <!-- End of Search Engine bar-->
+
+  <h1>Members page </h1>
+  
+  <!-- Start of Post-->
+  {% for member in members %}
+    <h2>
+      <a href="{% url 'swj:member_detail' member.id %}">
+        {{ member.name }}
+      </a>
+    </h2>
+    <p class="date">
+      Published {{ member.publish }} by {{ member.author }}
+    </p>
+    {{ member.body|truncatewords:30|linebreaks }}
+  {% endfor %}
+    {% endblock %}
+  </div>
+  <!-- end of Content bar -->
+</body>
+</html>
